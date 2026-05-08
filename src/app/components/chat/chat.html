@@ -1,0 +1,76 @@
+<div class="chat-main-container animate__animated animate__fadeIn">
+  <div class="chat-window">
+    
+    <div class="chat-sidebar">
+      <div class="sidebar-header">
+        <h5 class="fw-bold text-white mb-3">COLEGIO XP <span style="color: var(--accent-glow)">COMMS</span></h5>
+        <div class="search-box-futuristic">
+          <input type="text" placeholder="Buscar conversación..." [(ngModel)]="filtroBusqueda">
+        </div>
+      </div>
+      
+      <div class="contacts-scroll scroll-custom">
+        <div class="px-3 py-2 small text-muted text-uppercase fw-bold" style="letter-spacing: 1px;">Canales</div>
+        <div *ngFor="let curso of cursos" (click)="seleccionarGrupal(curso)" 
+             class="contact-item" [class.active]="seleccionado?.id === curso.id && modo === 'grupal'">
+          <div class="rounded-circle bg-primary d-flex justify-content-center align-items-center me-3" style="width: 40px; height: 40px;">
+            <i class="bi bi-hash text-white"></i>
+          </div>
+          <span class="text-white fw-medium">{{ curso.nombre_curso }}</span>
+        </div>
+
+        <div class="px-3 py-2 small text-muted text-uppercase fw-bold mt-3" style="letter-spacing: 1px;">Privado</div>
+        <div *ngFor="let c of contactosFiltrados" (click)="seleccionarPrivado(c)" 
+             class="contact-item" [class.active]="seleccionado?.id === c.id && modo === 'privado'">
+          <img [src]="c.foto_url ? 'http://localhost:3000'+c.foto_url : 'assets/default-user.png'" 
+               class="rounded-circle me-3" style="width: 40px; height: 40px; object-fit: cover; border: 2px solid var(--glass-border);">
+          <div>
+            <div class="text-white fw-medium">{{ c.nombre }}</div>
+            <small class="text-muted">{{ c.rol | titlecase }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-content">
+      <div *ngIf="!seleccionado" class="m-auto text-center">
+        <div class="mb-4">
+            <i class="bi bi-cpu" style="font-size: 5rem; color: rgba(255,255,255,0.05)"></i>
+        </div>
+        <h4 class="text-muted fw-light" style="letter-spacing: 3px;">INICIAR ENLACE</h4>
+      </div>
+
+      <ng-container *ngIf="seleccionado">
+        <div class="chat-header">
+          <h5 class="mb-0 fw-bold">
+            <span class="text-muted">#</span> {{ seleccionado.nombre || seleccionado.nombre_curso }}
+          </h5>
+        </div>
+
+        <div class="messages-area">
+          <div *ngFor="let m of mensajes" 
+               [ngClass]="m.remitente_id == miId ? 'msg-sent' : 'msg-received'" 
+               class="message-wrapper">
+            <div class="message-bubble">
+              <small *ngIf="modo === 'grupal' && m.remitente_id != miId" class="d-block fw-bold mb-1" style="color: var(--accent-glow); font-size: 0.75rem;">
+                {{ m.remitente_nombre }}
+              </small>
+              {{ m.mensaje }}
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input-area">
+          <div class="input-glass-container">
+            <input type="text" placeholder="Escribe un mensaje..." 
+                   [(ngModel)]="nuevoMensaje" (keyup.enter)="enviar()">
+            <button class="btn-send-neon" (click)="enviar()">
+                <i class="bi bi-send-fill"></i>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+  </div>
+</div>

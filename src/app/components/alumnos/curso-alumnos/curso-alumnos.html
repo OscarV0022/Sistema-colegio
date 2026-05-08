@@ -1,0 +1,264 @@
+<div class="container-fluid mt-4 animate__animated animate__fadeIn">
+  <div class="row">
+    
+    <div class="col-md-4 col-lg-3 mb-4">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-dark text-white text-center py-4">
+          <h5 class="fw-bold mb-0 text-truncate px-2">{{ nombreCurso }}</h5>
+          <small class="text-info">Mi Aula Virtual</small>
+        </div>
+        <div class="list-group list-group-flush">
+          
+          <button type="button" class="list-group-item list-group-item-action py-3 d-flex align-items-center fw-bold text-primary"
+                  (click)="verMisCalificaciones()" [class.bg-light]="vistaActual === 'calificaciones'">
+            <i class="bi bi-trophy-fill me-3"></i> Mi Rendimiento
+          </button>
+
+          <hr class="m-0 opacity-25">
+
+          <button type="button" class="list-group-item list-group-item-action py-3 d-flex align-items-center"
+                  *ngFor="let unidad of unidades" (click)="seleccionarUnidad(unidad)"
+                  [class.bg-primary]="unidadSeleccionada?.id === unidad.id && vistaActual === 'unidad'" 
+                  [class.text-white]="unidadSeleccionada?.id === unidad.id && vistaActual === 'unidad'"
+                  [class.border-start]="unidad.es_examen" [class.border-danger]="unidad.es_examen" [class.border-4]="unidad.es_examen">
+            <i class="bi me-3" [class]="unidad.es_examen ? 'bi-file-lock2 text-danger' : 'bi-folder2-open'"></i> 
+            {{ unidad.nombre_modulo }}
+          </button>
+        </div>
+      </div>
+      <a routerLink="/alumno/dashboard" class="btn btn-outline-secondary w-100 mt-3 shadow-sm">
+        <i class="bi bi-arrow-left me-2"></i> Mis Cursos
+      </a>
+    </div>
+
+    <div class="col-md-8 col-lg-9">
+      <div class="card shadow-sm border-0 h-100 p-4">
+        
+        <div *ngIf="vistaActual === 'calificaciones'" class="animate__animated animate__fadeIn">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-dark mb-0"><i class="bi bi-patch-check-fill text-success me-2"></i>Mis Notas</h2>
+            <span class="badge fs-6 shadow-sm" [ngClass]="(totalZona + totalExamenes) >= 61 ? 'bg-success' : 'bg-secondary'">
+              {{ (totalZona + totalExamenes) >= 61 ? 'CURSO APROBADO 🎉' : 'EN PROGRESO' }}
+            </span>
+          </div>
+          <hr class="mb-4">
+
+          <div class="table-responsive bg-white rounded border shadow-sm mb-4">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-dark">
+                <tr>
+                  <th>Actividad</th>
+                  <th>Clasificación</th>
+                  <th class="text-center">Mi Nota</th>
+                  <th class="text-end">Valor Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let n of notasResumen">
+                  <td class="fw-bold text-dark">{{ n.titulo }}</td>
+                  <td>
+                    <span class="badge" [ngClass]="n.es_examen ? 'bg-danger' : 'bg-primary'">
+                      {{ n.es_examen ? 'EXAMEN' : 'ZONA' }}
+                    </span>
+                  </td>
+                  <td class="text-center fw-bold">
+                    <span [class]="n.nota_obtenida !== null ? 'text-success' : 'text-warning text-dark'">
+                       {{ n.nota_obtenida !== null ? n.nota_obtenida : 'Pendiente' }}
+                    </span>
+                  </td>
+                  <td class="text-end text-muted">{{ n.valor_maximo }} pts</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="p-3 bg-primary bg-opacity-10 border-start border-4 border-primary rounded shadow-sm">
+                <small class="text-primary fw-bold d-block">MI ZONA ACUMULADA</small>
+                <h4 class="fw-bold mb-0 text-dark">{{ totalZona | number:'1.2-2' }} <span class="fs-6 text-muted">/ 40.00</span></h4>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-3 bg-danger bg-opacity-10 border-start border-4 border-danger rounded shadow-sm">
+                <small class="text-danger fw-bold d-block">MIS EXÁMENES</small>
+                <h4 class="fw-bold mb-0 text-dark">{{ totalExamenes | number:'1.2-2' }} <span class="fs-6 text-muted">/ 60.00</span></h4>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-3 bg-dark text-white rounded shadow-lg border-bottom border-4 border-info">
+                <small class="text-info fw-bold d-block">NOTA TOTAL ACTUAL</small>
+                <h3 class="fw-bold mb-0 text-white">{{ (totalZona + totalExamenes) | number:'1.2-2' }} <span class="fs-6 opacity-50">/ 100</span></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="vistaActual === 'unidad' && unidadSeleccionada">
+          
+          <div class="d-flex justify-content-between align-items-center mb-4">
+             <h2 class="fw-bold text-dark mb-0">
+               <i class="bi me-2 text-primary" [class]="unidadSeleccionada.es_examen ? 'bi-shield-lock text-danger' : 'bi-bookmark-star'"></i> 
+               {{ unidadSeleccionada?.nombre_modulo }}
+             </h2>
+          </div>
+          <hr class="mb-4">
+
+          <div *ngIf="videoSeleccionado" class="mb-4 animate__animated animate__zoomIn">
+            <div class="card border-0 shadow-lg overflow-hidden">
+              <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center py-2">
+                <span class="small fw-bold"><i class="bi bi-youtube me-2"></i> {{ videoSeleccionado.titulo }}</span>
+                <button class="btn-close btn-close-white" (click)="videoSeleccionado = null"></button>
+              </div>
+              <div class="ratio ratio-16x9">
+                <iframe [src]="getSafeVideoUrl(videoSeleccionado.archivo_url)" allowfullscreen frameborder="0"></iframe>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-12" *ngFor="let act of actividades">
+              <div class="card border-0 bg-light shadow-sm shadow-hover">
+                <div class="card-body d-flex justify-content-between align-items-center py-3">
+                  
+                  <div (click)="verRecurso(act)" style="cursor: pointer;" class="flex-grow-1">
+                    <div class="d-flex align-items-center mb-1">
+                      <i class="fs-4 me-3" [class]="'bi ' + getIconConfig(act).icon + ' ' + getIconConfig(act).color"></i>
+                      <span class="fw-bold text-dark fs-5">{{ act.titulo }}</span>
+                      
+                      <ng-container *ngIf="act.tipo === 'tarea'">
+                        <span *ngIf="!act.fecha_entrega" class="badge bg-secondary ms-3">Sin entregar</span>
+                        
+                        <span *ngIf="act.fecha_entrega && act.contenido_url == null" class="badge bg-danger ms-3">
+                          <i class="bi bi-x-circle"></i> Entrega Anulada
+                        </span>
+                        
+                        <span *ngIf="act.contenido_url != null && act.nota == null" class="badge bg-warning text-dark ms-3">
+                          <i class="bi bi-clock-history"></i> Pendiente
+                        </span>
+                        
+                        <span *ngIf="act.nota != null" class="badge bg-success ms-3">
+                          <i class="bi bi-check-circle-fill"></i> Calificada: {{ act.nota }} / {{ act.ponderacion }}
+                        </span>
+                      </ng-container>
+                    </div>
+                    <p class="text-muted small mb-0 ms-5">{{ act.descripcion || 'Sin instrucciones adicionales.' }}</p>
+                    
+                    <div *ngIf="act.comentario_alumno" class="ms-5 mt-2 p-2 bg-white rounded border-start border-4 border-warning shadow-sm small text-muted">
+                      <i class="bi bi-pencil-square"></i> <strong>Tu justificación:</strong> {{ act.comentario_alumno }}
+                    </div>
+
+                    <div *ngIf="act.comentario_profesor" class="ms-5 mt-2 p-2 bg-white rounded border-start border-4 border-info shadow-sm small">
+                      <strong class="text-info"><i class="bi bi-chat-left-dots-fill"></i> Profesor:</strong> {{ act.comentario_profesor }}
+                    </div>
+                  </div>
+                  
+                  <div class="ms-3 d-flex gap-2">
+                    <button *ngIf="act.tipo === 'tarea' && !act.fecha_entrega" class="btn btn-success fw-bold shadow-sm" 
+                            (click)="prepararEntrega(act)" data-bs-toggle="modal" data-bs-target="#modalEntrega">
+                      <i class="bi bi-cloud-arrow-up me-2"></i>Entregar
+                    </button>
+
+                    <button *ngIf="act.tipo === 'tarea' && act.fecha_entrega && act.nota == null" 
+                            class="btn fw-bold shadow-sm" 
+                            [ngClass]="act.contenido_url ? 'btn-warning text-dark' : 'btn-success'"
+                            (click)="abrirModificar(act)" data-bs-toggle="modal" data-bs-target="#modalModificar">
+                      <i class="bi me-2" [ngClass]="act.contenido_url ? 'bi-pencil-square' : 'bi-arrow-repeat'"></i>
+                      {{ act.contenido_url ? 'Gestionar Entrega' : 'Re-subir Tarea' }}
+                    </button>
+                    
+                    <button *ngIf="act.tipo === 'material'" class="btn btn-outline-primary" (click)="verRecurso(act)">
+                      <i class="bi bi-eye me-2"></i>Ver
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            
+            <div *ngIf="actividades.length === 0" class="text-center py-5">
+               <i class="bi bi-cloud-slash fs-1 text-muted"></i>
+               <p class="text-muted mt-2">No hay actividades publicadas aún.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalEntrega" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title fw-bold">Entregar: {{ tareaParaEntregar?.titulo }}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="alert alert-warning small d-flex justify-content-between mb-4">
+          <span><i class="bi bi-info-circle me-1"></i> Valor: <strong>{{ tareaParaEntregar?.ponderacion }} pts</strong></span>
+          <span class="badge bg-dark">Formato: {{ tareaParaEntregar?.formato_entrega | uppercase }}</span>
+        </div>
+        <div *ngIf="tareaParaEntregar?.formato_entrega !== 'texto'">
+          <label class="form-label fw-bold">Sube tu archivo:</label>
+          <input type="file" class="form-control border-success shadow-sm" (change)="onFileSelected($event)"
+                 [accept]="tareaParaEntregar?.formato_entrega === 'pdf' ? '.pdf' : '.doc,.docx,.xls,.xlsx,.txt'">
+        </div>
+        <div *ngIf="tareaParaEntregar?.formato_entrega === 'texto'">
+          <label class="form-label fw-bold">Tu respuesta:</label>
+          <textarea class="form-control border-primary shadow-sm" rows="6"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success px-4 fw-bold shadow-sm" (click)="enviarTarea()" data-bs-dismiss="modal">
+           <i class="bi bi-send-check-fill me-2"></i>Enviar Tarea
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalModificar" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header bg-warning text-dark">
+        <h5 class="modal-title fw-bold"><i class="bi bi-exclamation-triangle-fill me-2"></i>Gestionar Entrega</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <p class="small text-muted mb-4">Ya realizaste una entrega para esta tarea. Puedes reemplazar el archivo o anular la entrega por completo.</p>
+        <div class="mb-4 d-flex gap-4 p-3 bg-light rounded border">
+          <div class="form-check">
+            <input class="form-check-input border-primary" type="radio" name="accion" id="optEditar" value="editar" [(ngModel)]="accionModificar">
+            <label class="form-check-label fw-bold text-primary" for="optEditar">Reemplazar Archivo</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input border-danger" type="radio" name="accion" id="optEliminar" value="eliminar" [(ngModel)]="accionModificar">
+            <label class="form-check-label fw-bold text-danger" for="optEliminar">Anular / Eliminar</label>
+          </div>
+        </div>
+        <div class="mb-3 animate__animated animate__fadeIn" *ngIf="accionModificar === 'editar'">
+          <label class="form-label fw-bold">Selecciona el nuevo archivo:</label>
+          <input type="file" class="form-control border-primary shadow-sm" (change)="onFileSelected($event)"
+                 [accept]="tareaParaEntregar?.formato_entrega === 'pdf' ? '.pdf' : '.doc,.docx,.xls,.xlsx,.txt'">
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Justificación <span class="text-danger">*</span></label>
+          <textarea class="form-control border-secondary shadow-sm" rows="3" [(ngModel)]="justificacion" placeholder="Ej. Me equivoqué de documento..."></textarea>
+          <small class="text-danger d-block mt-1">El catedrático leerá esta justificación.</small>
+        </div>
+      </div>
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn px-4 fw-bold shadow-sm text-white" 
+                [ngClass]="accionModificar === 'eliminar' ? 'btn-danger' : 'btn-primary'" 
+                (click)="confirmarModificacion()" data-bs-dismiss="modal">
+           <i class="bi me-2" [ngClass]="accionModificar === 'eliminar' ? 'bi-trash-fill' : 'bi-save-fill'"></i>
+           {{ accionModificar === 'eliminar' ? 'Confirmar Anulación' : 'Actualizar Entrega' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,185 @@
+/* Paleta Futurista Elegante */
+:host {
+  --glass-bg: rgba(20, 20, 30, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --accent-glow: #00d4ff;
+  --text-bright: #ffffff;
+  --text-dim: #b0b0cc;
+  --bg-deep: #0a0a12;
+}
+
+/* Contenedor Ultra-Ancho y Centrado */
+.chat-main-container {
+  width: 96vw;
+  max-width: 1800px;
+  height: 88vh;
+  margin: 20px auto;
+  background: var(--bg-deep);
+  background-image: radial-gradient(circle at top right, rgba(0, 212, 255, 0.05), transparent),
+                    radial-gradient(circle at bottom left, rgba(144, 0, 255, 0.05), transparent);
+  border-radius: 24px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  color: var(--text-bright);
+}
+
+.chat-window {
+  height: 100%;
+  display: flex;
+  backdrop-filter: blur(10px); /* Efecto cristal */
+}
+
+/* Sidebar Estilo Glass */
+.chat-sidebar {
+  background: rgba(15, 15, 25, 0.5);
+  border-right: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+}
+
+.sidebar-header {
+  padding: 25px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.search-box-futuristic {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 8px 15px;
+  transition: 0.3s;
+}
+
+.search-box-futuristic:focus-within {
+  border-color: var(--accent-glow);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+.search-box-futuristic input {
+  background: transparent;
+  border: none;
+  color: white;
+  width: 100%;
+  outline: none;
+}
+
+/* Lista de Contactos */
+.contacts-scroll {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.contact-item {
+  margin-bottom: 5px;
+  padding: 15px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.contact-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.contact-item.active {
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.1), transparent);
+  border-left: 4px solid var(--accent-glow);
+}
+
+/* Área de Chat */
+.chat-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background: rgba(20, 20, 30, 0.2);
+}
+
+.chat-header {
+  padding: 20px 30px;
+  background: rgba(15, 15, 25, 0.3);
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+}
+
+.messages-area {
+  flex-grow: 1;
+  padding: 30px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Burbujas Minimalistas */
+.message-wrapper { display: flex; width: 100%; }
+.msg-sent { justify-content: flex-end; }
+.msg-received { justify-content: flex-start; }
+
+.message-bubble {
+  max-width: 60%;
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  border-radius: 20px;
+}
+
+.msg-sent .message-bubble {
+  background: linear-gradient(135deg, #00d4ff 0%, #0072ff 100%);
+  color: white;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+}
+
+.msg-received .message-bubble {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--glass-border);
+  color: var(--text-bright);
+  border-bottom-left-radius: 4px;
+}
+
+/* Input de Mensaje */
+.chat-input-area {
+  padding: 25px 40px;
+  background: transparent;
+}
+
+.input-glass-container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.input-glass-container input {
+  background: transparent;
+  border: none;
+  color: white;
+  flex-grow: 1;
+  outline: none;
+  padding: 5px;
+}
+
+.btn-send-neon {
+  color: var(--accent-glow);
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  transition: 0.3s;
+}
+
+.btn-send-neon:hover {
+  transform: scale(1.1);
+  text-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }

@@ -1,0 +1,50 @@
+<div class="container mt-5 animate__animated animate__fadeIn">
+  <div class="text-center mb-5">
+    <h1 class="fw-bold display-4">Gestión de <span class="text-success">Estudiantes</span></h1>
+    <p class="lead text-muted">Administración centralizada de ingresos, cursos y expedientes escolares.</p>
+    <div class="mx-auto mt-3" style="width: 120px; height: 4px; background-color: #198754; border-radius: 2px;"></div>
+  </div>
+
+  <div class="row g-4 justify-content-center">
+    
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0 border-top border-4 border-success py-4 px-3 text-center">
+        <div class="card-body">
+          <div class="rounded-circle bg-success bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px;">
+            <i class="bi bi-person-plus text-success fs-1"></i>
+          </div>
+          <h3 class="fw-bold mb-3">Inscripción</h3>
+          <p class="text-muted small mb-4">Registro de nuevos alumnos y creación de perfiles en MariaDB.</p>
+          <a class="btn btn-success w-100 fw-bold py-2" routerLink="/estudiantes/registro">Ingresar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0 border-top border-4 border-primary py-4 px-3 text-center">
+        <div class="card-body">
+          <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px;">
+            <i class="bi bi-journal-check text-primary fs-1"></i>
+          </div>
+          <h3 class="fw-bold mb-3">Asignación</h3>
+          <p class="text-muted small mb-4">Vinculación de estudiantes con sus respectivos cursos y grados.</p>
+          <a class="btn btn-primary w-100 fw-bold py-2" routerLink="/estudiantes/asignacion">Ingresar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-0 border-top border-4 border-warning py-4 px-3 text-center">
+        <div class="card-body">
+          <div class="rounded-circle bg-warning bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px;">
+            <i class="bi bi-search text-warning fs-1"></i>
+          </div>
+          <h3 class="fw-bold mb-3">Buscador</h3>
+          <p class="text-muted small mb-4">Consulta de expedientes y visualización de carga académica.</p>
+          <a class="btn btn-warning text-white w-100 fw-bold py-2" routerLink="/estudiantes/lista">Ingresar</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

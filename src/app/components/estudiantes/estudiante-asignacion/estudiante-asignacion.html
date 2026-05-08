@@ -1,0 +1,45 @@
+<div class="container mt-5 animate__animated animate__fadeIn">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card shadow-lg border-0 border-top border-5 border-primary">
+        <div class="card-header bg-white py-3">
+          <h3 class="fw-bold text-primary mb-0 text-center">Asignación Académica</h3>
+        </div>
+        <div class="card-body p-4">
+          
+          <div class="input-group mb-4 shadow-sm">
+            <input type="text" class="form-control" placeholder="Ingrese Carné (Ej: 2026-001)" [(ngModel)]="carnetBusqueda">
+            <button class="btn btn-primary" (click)="buscar()">
+              <i class="bi bi-search"></i> Buscar
+            </button>
+          </div>
+
+          <div *ngIf="estudiante" class="animate__animated animate__fadeInUp">
+            <div class="alert alert-info border-0 shadow-sm d-flex align-items-center">
+              <i class="bi bi-person-check-fill fs-3 me-3"></i>
+              <div>
+                <h5 class="mb-0 fw-bold">{{ estudiante.nombre }}</h5>
+                <small>Grado Actual: <strong>{{ estudiante.grado_actual }}</strong></small>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="mb-4">
+              <label class="form-label fw-bold">Seleccione el Nuevo Grado</label>
+              <select class="form-select form-select-lg shadow-sm" [(ngModel)]="nuevoGrado" name="nuevoGrado">
+                <option value="" disabled selected>Elegir grado...</option>
+                <option *ngFor="let g of listaGrados" [value]="g.grado">{{ g.grado }}</option>
+              </select>
+            </div>
+
+            <button class="btn btn-success w-100 py-3 fw-bold shadow" (click)='asignar()' [disabled]="!nuevoGrado">
+              <i class="bi bi-arrow-repeat me-2"></i> Procesar Cambio y Asignación
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

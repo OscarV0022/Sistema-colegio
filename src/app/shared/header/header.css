@@ -1,0 +1,54 @@
+/* 🌊 NAVBAR ESTILO TECH (Celeste sobre Negro) */
+.navbar-custom {
+    background-color: #000000 !important; /* Fondo Negro Puro */
+    padding: 0.6rem 2rem;
+    border-bottom: 3px solid #00d4ff; /* 🚀 Cambiado de naranja a Celeste Eléctrico */
+}
+
+/* 🚀 ESTILO DE LOS BOTONES (Letras Blancas) */
+.nav-link {
+    color: #ffffff !important;
+    font-weight: 600;
+    margin-right: 12px;
+    padding: 10px 18px !important;
+    border-radius: 8px;
+    transition: all 0.25s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+}
+
+/* 🚀 EL TOQUE CELESTE: Seleccionado y Hover (Letras Negras) */
+.nav-link:hover, 
+.nav-link.active {
+    background-color: #00d4ff !important; /* Celeste Vibrante */
+    color: #000000 !important; /* Letras Negras para que se lea nítido */
+    box-shadow: 0px 4px 15px rgba(0, 212, 255, 0.5); /* Sombra celeste */
+    transform: translateY(-1px);
+}
+
+.logo-img {
+    height: 48px;
+    /* Sombra celeste para el logo */
+    filter: drop-shadow(0px 0px 4px rgba(0, 212, 255, 0.6));
+}
+
+.chat-quemado {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+}
+
+.badge-status {
+    font-size: 0.55rem;
+    margin-left: 5px;
+    background-color: #333 !important; /* Gris oscuro para que no choque */
+}
+
+/* Efecto especial para el botón salir */
+/* Mantenemos el rojo al hover porque 'Salir' siempre es alerta */
+.text-warning:hover {
+    background-color: #dc3545 !important; 
+    color: white !important;
+    box-shadow: 0px 4px 10px rgba(220, 53, 69, 0.4);
+}

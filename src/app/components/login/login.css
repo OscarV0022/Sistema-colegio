@@ -1,0 +1,132 @@
+/* 🌚 FONDO BASE PROFESIONAL */
+.auth-wrapper {
+    background-color: #080a0c; /* Casi negro, muy elegante */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 📦 CONTENEDOR PRINCIPAL */
+.auth-content {
+    background-color: #121519; /* Gris carbón sólido */
+    width: 100%;
+    max-width: 420px;
+    padding: 50px 40px;
+    border-radius: 20px;
+    border: 1px solid #1f242b; /* Borde muy fino */
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+}
+
+/* 💠 BRANDING */
+.brand-logo {
+    color: #00d4ff;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: inline-block;
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
+}
+
+.auth-header h1 {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+    letter-spacing: -1px;
+}
+
+.auth-header p {
+    color: #636e7b;
+    font-size: 0.95rem;
+    margin-bottom: 40px;
+}
+
+/* ⌨️ CAMPOS DE ENTRADA */
+.form-field {
+    margin-bottom: 25px;
+}
+
+.form-field label {
+    display: block;
+    color: #8b949e;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.input-wrapper {
+    background-color: #080a0c;
+    border: 1px solid #2d333b;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-wrapper:focus-within {
+    border-color: #00d4ff;
+    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.1);
+}
+
+.input-wrapper i {
+    padding: 0 15px;
+    color: #484f58;
+    font-size: 1.1rem;
+}
+
+.input-wrapper input {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    padding: 14px 15px 14px 0;
+    width: 100%;
+    outline: none;
+}
+
+/* 🚀 BOTÓN DE ACCIÓN */
+.btn-submit {
+    background-color: #00d4ff;
+    color: #080a0c;
+    border: none;
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+}
+
+/* 🔘 PIE DE PÁGINA */
+.auth-footer {
+    margin-top: 40px;
+    color: #484f58;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #238636; /* Verde "Online" */
+    border-radius: 50%;
+    display: inline-block;
+}

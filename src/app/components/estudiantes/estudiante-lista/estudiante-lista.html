@@ -1,0 +1,54 @@
+<div class="container mt-5">
+  <div class="card shadow-sm border-0">
+    <div class="card-header bg-primary bg-gradient text-white py-3">
+      <h4 class="mb-0 fw-bold"><i class="bi bi-people-fill me-2"></i>Buscador de Estudiantes</h4>
+    </div>
+    
+    <div class="card-body p-4">
+      <div class="row mb-4">
+        <div class="col-md-8 mx-auto">
+          <div class="input-group input-group-lg shadow-sm">
+            <span class="input-group-text bg-white border-end-0 text-muted">
+              <i class="bi bi-search"></i>
+            </span>
+            <input type="text" class="form-control border-start-0 shadow-none" 
+                   placeholder="Ingresá nombre o carné del alumno..." 
+                   [(ngModel)]="termino" (input)="buscar()">
+          </div>
+          <div class="form-text text-center mt-2">Búsqueda rápida en tiempo real sobre la base de datos MariaDB</div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light text-uppercase small">
+            <tr>
+              <th class="ps-4">Carné</th>
+              <th>Nombre Completo</th>
+              <th>Grado Actual</th>
+              <th class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let est of estudiantes" class="animate__animated animate__fadeIn">
+              <td class="ps-4 fw-bold text-primary">{{ est.carnet }}</td>
+              <td>{{ est.nombre }}</td>
+              <td><span class="badge rounded-pill bg-info-subtle text-info-emphasis border border-info">{{ est.grado_actual }}</span></td>
+              <td class="text-center">
+                <button class="btn btn-outline-primary btn-sm px-3 fw-bold border-2" (click)="irAlDetalle(est.id)">
+                  Ver Perfil <i class="bi bi-person-lines-fill ms-1"></i>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="estudiantes.length === 0">
+              <td colspan="4" class="text-center py-5">
+                <i class="bi bi-inbox text-muted" style="font-size: 3rem;"></i>
+                <p class="text-muted mt-2">No se encontraron estudiantes activos con ese criterio.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
